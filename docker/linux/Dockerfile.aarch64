@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+WORKDIR /usr/local/src
+
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y gcc-aarch64-linux-gnu;
+
+COPY src/linux/pause.c pause.c
+
+RUN set- eux; \
+    aarch64-linux-gnu-gcc -static -o pause pause.c; \
+    tar -zvcf pause-aarch64.tar.gz pause;
+
+CMD ["/bin/bash"]

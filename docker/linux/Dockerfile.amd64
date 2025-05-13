@@ -1,0 +1,10 @@
+FROM gcc:latest
+
+WORKDIR /usr/local/src
+COPY src/linux/pause.c .
+
+RUN set -eux; \
+    gcc -static -o pause pause.c; \
+    tar -zvcf pause-amd64.tar.gz pause;
+
+CMD ["/bin/bash"]
