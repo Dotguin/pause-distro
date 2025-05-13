@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'  # 태그 푸시할 때 실행 (예: v1.0.0)
 
+permissions:
+  contents: write
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
