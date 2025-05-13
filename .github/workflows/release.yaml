@@ -24,5 +24,6 @@ jobs:
 
       - name: Release tarballs
         uses: softprops/action-gh-release@v2
-        files: |
-          ./release/pause-*.tar.gz
+        with:
+          files: |
+            ./release/pause-*.tar.gz
