@@ -1,0 +1,28 @@
+name: Release pause distribution tarball
+
+on:
+  push:
+    tags:
+      - 'v*'  # 태그 푸시할 때 실행 (예: v1.0.0)
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build pause binaries
+        run: make build-pause ARCH=all OS=linux
+
+      - name: List generated files
+        run: ls -lh release/
+
+      - name: Release tarballs
+        uses: softprops/action-gh-release@v2
+        files: |
+          ./release/pause-*.tar.gz
